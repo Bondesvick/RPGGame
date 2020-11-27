@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using RPGGame.Services.CharacterService;
 
 namespace RPGGame
 {
@@ -26,8 +28,10 @@ namespace RPGGame
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
+            services.AddAutoMapper(typeof(Startup));
+            services.AddScoped<ICharacterService, CharacterService>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "RPGGame", Version = "v1" });
