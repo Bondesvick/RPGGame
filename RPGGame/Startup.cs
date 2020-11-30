@@ -39,6 +39,9 @@ namespace RPGGame
             services.AddDbContext<DataContext>(x =>
                 x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            //services.AddDbContext<DataContext>(x =>
+            //    x.UseSqlServer(Configuration.GetConnectionString("Second")));
+
             services.AddControllers();
             services.AddAutoMapper(typeof(Startup));
 

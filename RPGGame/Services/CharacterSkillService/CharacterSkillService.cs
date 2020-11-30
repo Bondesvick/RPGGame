@@ -56,6 +56,16 @@ namespace RPGGame.Services.CharacterSkillService
                     return response;
                 }
 
+                CharacterSkill savedCharacterSkill = await _context.CharacterSkills.FirstOrDefaultAsync(cs =>
+                    cs.CharacterId == newCharacterSkill.CharacterId && cs.SkillId == newCharacterSkill.SkillId);
+
+                if (savedCharacterSkill != null)
+                {
+                    response.Success = false;
+                    response.Message = "This character already have this skill!";
+                    return response;
+                }
+
                 CharacterSkill characterSkill = new CharacterSkill
                 {
                     Character = character,
