@@ -64,6 +64,7 @@ namespace RPGGame.Services.CharacterSkillService
 
                 await _context.CharacterSkills.AddAsync(characterSkill);
                 await _context.SaveChangesAsync();
+                response.Data = _mapper.Map<GetCharacterDto>(character);
             }
             catch (Exception e)
             {

@@ -14,7 +14,7 @@ namespace RPGGame
     {
         public AutoMapperProfile()
         {
-            CreateMap<Character, GetCharacterDto>().ForMember(dto => dto.Skills, c => c.MapFrom(c => c.CharacterSkills.Select(cs => cs.Skill)));
+            CreateMap<Character, GetCharacterDto>().ForMember(dto => dto.Skills, c => c.MapFrom(ch => ch.CharacterSkills.Select(cs => cs.Skill)));
             CreateMap<AddCharacterDTo, Character>();
             CreateMap<Weapon, GetWeaponDto>();
             CreateMap<Skill, GetSkillDto>();
