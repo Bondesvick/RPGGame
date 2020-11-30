@@ -19,21 +19,6 @@ namespace RPGGame.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");
 
-            modelBuilder.Entity("CharacterSkill", b =>
-                {
-                    b.Property<int>("CharactersId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SkillsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CharactersId", "SkillsId");
-
-                    b.HasIndex("SkillsId");
-
-                    b.ToTable("CharacterSkill");
-                });
-
             modelBuilder.Entity("RPGGame.Models.Character", b =>
                 {
                     b.Property<int>("Id")
@@ -67,6 +52,21 @@ namespace RPGGame.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Characters");
+                });
+
+            modelBuilder.Entity("RPGGame.Models.CharacterSkill", b =>
+                {
+                    b.Property<int>("CharacterId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SkillId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CharacterId", "SkillId");
+
+                    b.HasIndex("SkillId");
+
+                    b.ToTable("CharacterSkills");
                 });
 
             modelBuilder.Entity("RPGGame.Models.Skill", b =>
@@ -132,21 +132,6 @@ namespace RPGGame.Migrations
                     b.ToTable("Weapons");
                 });
 
-            modelBuilder.Entity("CharacterSkill", b =>
-                {
-                    b.HasOne("RPGGame.Models.Character", null)
-                        .WithMany()
-                        .HasForeignKey("CharactersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RPGGame.Models.Skill", null)
-                        .WithMany()
-                        .HasForeignKey("SkillsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("RPGGame.Models.Character", b =>
                 {
                     b.HasOne("RPGGame.Models.User", "User")
@@ -154,6 +139,25 @@ namespace RPGGame.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("RPGGame.Models.CharacterSkill", b =>
+                {
+                    b.HasOne("RPGGame.Models.Character", "Character")
+                        .WithMany("CharacterSkills")
+                        .HasForeignKey("CharacterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RPGGame.Models.Skill", "Skill")
+                        .WithMany("CharacterSkills")
+                        .HasForeignKey("SkillId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Character");
+
+                    b.Navigation("Skill");
                 });
 
             modelBuilder.Entity("RPGGame.Models.Weapon", b =>
@@ -169,7 +173,14 @@ namespace RPGGame.Migrations
 
             modelBuilder.Entity("RPGGame.Models.Character", b =>
                 {
+                    b.Navigation("CharacterSkills");
+
                     b.Navigation("Weapon");
+                });
+
+            modelBuilder.Entity("RPGGame.Models.Skill", b =>
+                {
+                    b.Navigation("CharacterSkills");
                 });
 
             modelBuilder.Entity("RPGGame.Models.User", b =>

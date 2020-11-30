@@ -19,7 +19,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using RPGGame.Data;
 using RPGGame.Services.CharacterService;
-using RPGGame.Services.SkillService;
+using RPGGame.Services.CharacterSkillService;
 using RPGGame.Services.WeaponService;
 
 namespace RPGGame
@@ -45,7 +45,7 @@ namespace RPGGame
             services.AddScoped<ICharacterService, CharacterService>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IWeaponService, WeaponService>();
-            services.AddScoped<ISkillService, SkillService>();
+            services.AddScoped<ICharacterSkillService, CharacterSkillService>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>

@@ -2,7 +2,7 @@
 
 namespace RPGGame.Migrations
 {
-    public partial class skill : Migration
+    public partial class Skill : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,39 +21,39 @@ namespace RPGGame.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CharacterSkill",
+                name: "CharacterSkills",
                 columns: table => new
                 {
-                    CharactersId = table.Column<int>(type: "int", nullable: false),
-                    SkillsId = table.Column<int>(type: "int", nullable: false)
+                    CharacterId = table.Column<int>(type: "int", nullable: false),
+                    SkillId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CharacterSkill", x => new { x.CharactersId, x.SkillsId });
+                    table.PrimaryKey("PK_CharacterSkills", x => new { x.CharacterId, x.SkillId });
                     table.ForeignKey(
-                        name: "FK_CharacterSkill_Characters_CharactersId",
-                        column: x => x.CharactersId,
+                        name: "FK_CharacterSkills_Characters_CharacterId",
+                        column: x => x.CharacterId,
                         principalTable: "Characters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CharacterSkill_Skills_SkillsId",
-                        column: x => x.SkillsId,
+                        name: "FK_CharacterSkills_Skills_SkillId",
+                        column: x => x.SkillId,
                         principalTable: "Skills",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CharacterSkill_SkillsId",
-                table: "CharacterSkill",
-                column: "SkillsId");
+                name: "IX_CharacterSkills_SkillId",
+                table: "CharacterSkills",
+                column: "SkillId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CharacterSkill");
+                name: "CharacterSkills");
 
             migrationBuilder.DropTable(
                 name: "Skills");

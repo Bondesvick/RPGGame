@@ -14,10 +14,10 @@ namespace RPGGame
     {
         public AutoMapperProfile()
         {
-            CreateMap<Character, GetCharacterDto>();
+            CreateMap<Character, GetCharacterDto>().ForMember(dto => dto.Skills, c => c.MapFrom(c => c.CharacterSkills.Select(cs => cs.Skill)));
             CreateMap<AddCharacterDTo, Character>();
-            CreateMap<Weapon, AddWeaponDto>();
-            CreateMap<Skill, AddSkillDto>();
+            CreateMap<Weapon, GetWeaponDto>();
+            CreateMap<Skill, GetSkillDto>();
         }
     }
 }

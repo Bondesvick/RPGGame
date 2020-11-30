@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 
 namespace RPGGame.Dtos.Skill
 {
-    public class AddSkillDto
+    public class AddCharacterSkillDto
     {
-        public string Name { get; set; }
-        public int Damage { get; set; }
+        public int SkillId { get; set; }
         public int CharacterId { get; set; }
     }
 }
